@@ -1,15 +1,16 @@
-package org.rahkar.duplicationFinding;
+package org.rahkar.duplicationFinding.util;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 
 public class DuplicationFinder {
     private static DuplicationFinder duplicationFinder = null;
-    private HashSet<Integer> checkHashSet = null;
-    private HashSet<Integer> outPutHashSet = null;
+    private HashSet<Integer> checkHashSet;
+    private HashSet<Integer> outPutHashSet;
 
 
-    public static DuplicationFinder getInstance(){
+     public static DuplicationFinder getInstance(){
         if (duplicationFinder == null)
             duplicationFinder = new DuplicationFinder();
         return duplicationFinder;
@@ -28,10 +29,13 @@ public class DuplicationFinder {
         return outPutHashSet;
     }
 
-    private void checkDup(int n){
-        if (checkHashSet.contains(n))
-            outPutHashSet.add(n);
-        else
-            checkHashSet.add(n);
+    private void checkDup(Integer n){
+        Optional<Integer> value = Optional.ofNullable(n);
+         if (value.isPresent()){
+             if (checkHashSet.contains(n))
+                 outPutHashSet.add(n);
+             else
+                 checkHashSet.add(n);
+         }
     }
 }
